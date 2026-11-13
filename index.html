@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lethabo | Data & Bioinformatics</title>
+    <!-- Importing a techy monospace font -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- GLOBAL STYLES --- */
+        :root {
+            --bg-color: #0d1117; /* GitHub Dark */
+            --text-main: #c9d1d9;
+            --text-highlight: #58a6ff; /* Tech Blue */
+            --accent-green: #238636; /* Data/Success Green */
+            --accent-purple: #a371f7; /* Bio/Innovation Purple */
+            --glass-bg: rgba(22, 27, 34, 0.7);
+            --glass-border: rgba(240, 246, 252, 0.1);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- BACKGROUND ANIMATION (Falling Code) --- */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.15; /* Keep it subtle so text is readable */
+            background-image: 
+                linear-gradient(180deg, transparent 0%, var(--bg-color) 90%),
+                repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(88, 166, 255, 0.1) 21px);
+        }
+
+        /* We create columns of falling text using CSS keyframes */
+        .code-column {
+            position: absolute;
+            top: -100%;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            color: var(--text-highlight);
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            animation: fall linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* --- LAYOUT & CONTAINERS --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- HEADER & TERMINAL EFFECT --- */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-top: 40px;
+        }
+
+        .terminal-window {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 20px;
+            display: inline-block;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .terminal-text {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .terminal-text span {
+            color: var(--accent-green);
+        }
+
+        .typing {
+            border-right: 2px solid var(--text-highlight);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+            display: inline-block;
+            vertical-align: bottom;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--text-highlight); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 20px 0 10px 0;
+            background: linear-gradient(90deg, var(--text-highlight), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8b949e;
+            margin-bottom: 30px;
+        }
+
+        /* --- BUTTONS (Badges) --- */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background: var(--text-highlight);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
+        }
+
+        /* --- CONTENT CARDS (Glassmorphism) --- */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(88, 166, 255, 0.4);
+        }
+
+        h2 {
+            font-family: 'Fira Code', monospace;
+            color: var(--text-highlight);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        li::marker {
+            color: var(--accent-green);
+        }
+
+        .highlight-box {
+            border-left: 4px solid var(--accent-purple);
+            padding-left: 20px;
+            font-style: italic;
+            color: #e6edf3;
+        }
+
+        /* Tech Stack Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--text-highlight);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        .tag.bio {
+            background: rgba(163, 113, 247, 0.1);
+            color: var(--accent-purple);
+            border-color: rgba(163, 113, 247, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation Layer -->
+    <div class="bg-animation" id="bgAnimation">
+        <!-- Javascript will populate this to keep the HTML clean -->
+    </div>
+
+    <div class="container">
+        <header>
+            <!-- Terminal Style Intro -->
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <p class="terminal-text">
+                    <span>lethabo@data:~$</span> <span class="typing">init bioinformatics_portfolio</span>
+                </p>
+            </div>
+
+            <h1>Hi, I'm Lethabo 👋</h1>
+            <p class="subtitle">Data Professional bridging Biochemistry, Bioinformatics, and Data Engineering.</p>
+
+            <div class="social-links">
+                <a href="https://linkedin.com/in/your-profile" class="btn" target="_blank">LinkedIn</a>
+                <a href="mailto:your.email@example.com" class="btn">Email</a>
+                <a href="https://github.com/mmetja-lethabo-kekana" class="btn" target="_blank">GitHub</a>
+            </div>
+        </header>
+
+        <main>
+            <!-- About Section -->
+            <section class="card">
+                <h2>// About Me</h2>
+                <p>I'm a data professional in the making with a background in <b>Biochemistry and Physiology</b> and an <b>honours degree in Bioinformatics</b>. I spent my studies learning how biological systems work and how to make sense of the data they produce. Now I'm combining that foundation with data analysis, data science, and data engineering.</p>
+            </section>
+
+            <!-- Focus Section -->
+            <section class="card">
+                <h2>// What I'm focused on</h2>
+                <ul>
+                    <li>Building data skills across analysis, science, and engineering, with a particular interest in <b>healthcare and life sciences data</b>.</li>
+                    <li>Continuously learning through industry-recognised courses and certifications.</li>
+                </ul>
+            </section>
+
+            <!-- What I Bring Section -->
+            <section class="card">
+                <h2>// What I bring</h2>
+                <div class="highlight-box">
+                    <p>A scientist's habit of asking careful questions, a comfort with messy real-world data, and the drive to turn raw numbers into something people can act on.</p>
+                </div>
+            </section>
+
+            <!-- Tech Stack Section -->
+            <section class="card">
+                <h2>// Tech Stack & Tools</h2>
+                <div class="tech-tags">
+                    <span class="tag bio">Biochemistry</span>
+                    <span class="tag bio">Bioinformatics</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">R</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Data Analysis</span>
+                    <span class="tag">Git/GitHub</span>
+                    <span class="tag">Linux</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script to generate the falling code background -->
+    <script>
+        const bgAnimation = document.getElementById('bgAnimation');
+        
+        // The text that will fall in the background
+        const codeSnippets = [
+            "ATCG-TTAG-GGCA", 
+            "import pandas as pd", 
+            "SELECT * FROM patients;", 
+            "def analyze_dna(seq):", 
+            "01001010 01100001", 
+            "ggplot(data, aes(x,y))",
+            "print('Hello World')",
+            "gc_content = 0.45",
+            "model.fit(X_train, y_train)"
+        ];
+
+        function createCodeColumn() {
+            const column = document.createElement('div');
+            column.classList.add('code-column');
+            
+            // Pick a random snippet
+            const text = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+            column.innerText = text;
+            
+            // Randomize position, speed, and length
+            column.style.left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 10 + 10; // between 10s and 20s
+            column.style.animationDuration = duration + 's';
+            
+            // Add it to the background
+            bgAnimation.appendChild(column);
+
+            // Remove it after it falls so the page doesn't get bogged down
+            setTimeout(() => {
+                column.remove();
+            }, duration * 1000);
+        }
+
+        // Create a new column every 300ms
+        setInterval(createCodeColumn, 300);
+    </script>
+</body>
+</html>
