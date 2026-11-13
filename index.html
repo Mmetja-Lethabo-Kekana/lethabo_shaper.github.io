@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lethabo | Data & Bioinformatics</title>
-    <!-- Importing a techy monospace font -->
+    <title>Lethabo Kekana | Healthcare Data Engineer</title>
+    <!-- Importing a techy monospace font and a clean sans-serif -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         /* --- GLOBAL STYLES --- */
         :root {
-            --bg-color: #0d1117; /* GitHub Dark */
+            --bg-color: #0d1117; 
             --text-main: #c9d1d9;
             --text-highlight: #58a6ff; /* Tech Blue */
             --accent-green: #238636; /* Data/Success Green */
             --accent-purple: #a371f7; /* Bio/Innovation Purple */
-            --glass-bg: rgba(22, 27, 34, 0.7);
+            --glass-bg: rgba(22, 27, 34, 0.75);
             --glass-border: rgba(240, 246, 252, 0.1);
         }
 
@@ -27,9 +27,10 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
-        /* --- BACKGROUND ANIMATION (Falling Code) --- */
+        /* --- BACKGROUND ANIMATION (Falling Code/DNA) --- */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -37,13 +38,12 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            opacity: 0.15; /* Keep it subtle so text is readable */
+            opacity: 0.15; 
             background-image: 
                 linear-gradient(180deg, transparent 0%, var(--bg-color) 90%),
                 repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(88, 166, 255, 0.1) 21px);
         }
 
-        /* We create columns of falling text using CSS keyframes */
         .code-column {
             position: absolute;
             top: -100%;
@@ -71,7 +71,7 @@
         /* --- HEADER & TERMINAL EFFECT --- */
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             padding-top: 40px;
         }
 
@@ -84,6 +84,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             text-align: left;
+            margin-bottom: 20px;
         }
 
         .terminal-header {
@@ -127,7 +128,7 @@
 
         h1 {
             font-size: 3rem;
-            margin: 20px 0 10px 0;
+            margin: 10px 0;
             background: linear-gradient(90deg, var(--text-highlight), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -137,9 +138,10 @@
             font-size: 1.2rem;
             color: #8b949e;
             margin-bottom: 30px;
+            font-weight: 600;
         }
 
-        /* --- BUTTONS (Badges) --- */
+        /* --- BUTTONS --- */
         .social-links {
             display: flex;
             justify-content: center;
@@ -167,7 +169,7 @@
             box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
         }
 
-        /* --- CONTENT CARDS (Glassmorphism) --- */
+        /* --- CONTENT CARDS --- */
         .card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -180,7 +182,7 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             border-color: rgba(88, 166, 255, 0.4);
         }
 
@@ -190,6 +192,9 @@
             border-bottom: 1px solid var(--glass-border);
             padding-bottom: 10px;
             margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         ul {
@@ -204,12 +209,42 @@
             color: var(--accent-green);
         }
 
+        /* Custom Highlights */
         .highlight-box {
             border-left: 4px solid var(--accent-purple);
-            padding-left: 20px;
+            padding: 15px 20px;
+            background: rgba(163, 113, 247, 0.05);
+            border-radius: 0 8px 8px 0;
             font-style: italic;
             color: #e6edf3;
         }
+
+        .project-title {
+            color: var(--accent-green);
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .goal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .goal-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.2rem; }
+        }
+
+        .goal-card {
+            background: rgba(88, 166, 255, 0.05);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .goal-card h4 { margin: 0 0 10px 0; color: var(--text-highlight); }
 
         /* Tech Stack Tags */
         .tech-tags {
@@ -234,19 +269,14 @@
             color: var(--accent-purple);
             border-color: rgba(163, 113, 247, 0.2);
         }
-
     </style>
 </head>
 <body>
 
-    <!-- Background Animation Layer -->
-    <div class="bg-animation" id="bgAnimation">
-        <!-- Javascript will populate this to keep the HTML clean -->
-    </div>
+    <div class="bg-animation" id="bgAnimation"></div>
 
     <div class="container">
         <header>
-            <!-- Terminal Style Intro -->
             <div class="terminal-window">
                 <div class="terminal-header">
                     <div class="dot red"></div>
@@ -254,58 +284,77 @@
                     <div class="dot green"></div>
                 </div>
                 <p class="terminal-text">
-                    <span>lethabo@data:~$</span> <span class="typing">init bioinformatics_portfolio</span>
+                    <span>lethabo@data:~$</span> <span class="typing">init healthcare_data_pipeline</span>
                 </p>
             </div>
 
-            <h1>Hi, I'm Lethabo 👋</h1>
-            <p class="subtitle">Data Professional bridging Biochemistry, Bioinformatics, and Data Engineering.</p>
+            <h1>Lethabo Kekana</h1>
+            <p class="subtitle">Aspiring Data Engineer | Healthcare & Life Sciences</p>
 
             <div class="social-links">
-                <a href="https://linkedin.com/in/your-profile" class="btn" target="_blank">LinkedIn</a>
-                <a href="mailto:your.email@example.com" class="btn">Email</a>
+                <a href="https://www.linkedin.com/in/lethabo-kekana-b22ab135b" class="btn" target="_blank">LinkedIn</a>
+                <a href="mailto:mmetjalkekana@gmail.com" class="btn">Email</a>
                 <a href="https://github.com/mmetja-lethabo-kekana" class="btn" target="_blank">GitHub</a>
             </div>
         </header>
 
         <main>
-            <!-- About Section -->
+            <!-- 1. Mini Bio / Positioning Statement -->
             <section class="card">
-                <h2>// About Me</h2>
-                <p>I'm a data professional in the making with a background in <b>Biochemistry and Physiology</b> and an <b>honours degree in Bioinformatics</b>. I spent my studies learning how biological systems work and how to make sense of the data they produce. Now I'm combining that foundation with data analysis, data science, and data engineering.</p>
+                <h2>// Positioning Statement</h2>
+                <p>I am an aspiring Data Engineer with a strong foundation in Biochemistry, Physiology, and Bioinformatics. I am passionate about building the reliable, well-structured data pipelines that power healthcare innovation, translating raw, messy biological data into systems that enable evidence-based decision-making.</p>
             </section>
 
-            <!-- Focus Section -->
+            <!-- 2. Target Role -->
             <section class="card">
-                <h2>// What I'm focused on</h2>
-                <ul>
-                    <li>Building data skills across analysis, science, and engineering, with a particular interest in <b>healthcare and life sciences data</b>.</li>
-                    <li>Continuously learning through industry-recognised courses and certifications.</li>
-                </ul>
+                <h2>// Target Role</h2>
+                <h3 style="color: var(--accent-green); margin-top: 0;">Healthcare Data Engineer</h3>
+                <p>Analysts and scientists can only do good work if the data reaching them is reliable and on time. Coming from a bioinformatics background where I wrangled messy biological files, data engineering feels like the professional, scaled-up version of that. I want to design and maintain secure systems—like those at Genomics England—that connect patient samples to life-saving research.</p>
             </section>
 
-            <!-- What I Bring Section -->
+            <!-- 3. Seed Projects -->
             <section class="card">
-                <h2>// What I bring</h2>
-                <div class="highlight-box">
-                    <p>A scientist's habit of asking careful questions, a comfort with messy real-world data, and the drive to turn raw numbers into something people can act on.</p>
+                <h2>// Seed Projects</h2>
+                <div style="margin-bottom: 25px;">
+                    <div class="project-title">01. Healthcare Disease Surveillance Dashboard</div>
+                    <p>Create a data pipeline that collects publicly available health data from organizations like the WHO and South Africa's Department of Health. The system will clean and store the data in a database, displaying trends through an interactive dashboard featuring disease incidence tracking, provincial statistics, and automated updates.</p>
+                </div>
+                <div>
+                    <div class="project-title">02. Open Genomic Data Pipeline</div>
+                    <p>Build an ETL pipeline in Python that ingests raw FASTA/FASTQ sequence files, calculates GC content, and stores the results in a cloud database (e.g., Azure) for easy querying via SQL.</p>
                 </div>
             </section>
 
-            <!-- Tech Stack Section -->
+            <!-- 4. Skills to Grow -->
             <section class="card">
-                <h2>// Tech Stack & Tools</h2>
+                <h2>// Skills to Grow</h2>
+                <p><b>Technical Focus:</b> Cloud Data Engineering (SQL, Python, ETL/ELT pipelines, Azure Data Factory, Databricks).</p>
+                <p><b>Soft Skill Focus:</b> Communication & Problem-Solving. Translating complex biological requirements into secure, scalable technical systems, and effectively communicating data quality issues to cross-functional teams.</p>
+                
                 <div class="tech-tags">
-                    <span class="tag bio">Biochemistry</span>
                     <span class="tag bio">Bioinformatics</span>
                     <span class="tag">Python</span>
-                    <span class="tag">R</span>
                     <span class="tag">SQL</span>
-                    <span class="tag">Data Analysis</span>
-                    <span class="tag">Git/GitHub</span>
-                    <span class="tag">Linux</span>
+                    <span class="tag">Azure</span>
+                    <span class="tag">Data Pipelines</span>
                 </div>
             </section>
+
+            <!-- 5. Goals -->
+            <section class="card">
+                <h2>// Goals</h2>
+                <div class="goal-grid">
+                    <div class="goal-card">
+                        <h4>🚀 30-Day Goal</h4>
+                        <p>Complete an online SQL course and apply it to a small, real-world healthcare dataset to practice data cleaning and querying.</p>
+                    </div>
+                    <div class="goal-card">
+                        <h4>🎯 6-Month Goal</h4>
+                        <p>Build and publish my "Healthcare Disease Surveillance Dashboard" on GitHub, complete with a data pipeline and visualization layer.</p>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 
@@ -313,36 +362,33 @@
     <script>
         const bgAnimation = document.getElementById('bgAnimation');
         
-        // The text that will fall in the background
+        // The text that will fall in the background (Mix of Bio & Tech)
         const codeSnippets = [
             "ATCG-TTAG-GGCA", 
             "import pandas as pd", 
             "SELECT * FROM patients;", 
             "def analyze_dna(seq):", 
             "01001010 01100001", 
-            "ggplot(data, aes(x,y))",
-            "print('Hello World')",
-            "gc_content = 0.45",
-            "model.fit(X_train, y_train)"
+            "GC_content = 0.45",
+            "azure.datafactory", 
+            "ETL_pipeline.run()",
+            "Genomics_England",
+            "while(data.is_clean):"
         ];
 
         function createCodeColumn() {
             const column = document.createElement('div');
             column.classList.add('code-column');
             
-            // Pick a random snippet
             const text = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
             column.innerText = text;
             
-            // Randomize position, speed, and length
             column.style.left = Math.random() * 100 + 'vw';
             const duration = Math.random() * 10 + 10; // between 10s and 20s
             column.style.animationDuration = duration + 's';
             
-            // Add it to the background
             bgAnimation.appendChild(column);
 
-            // Remove it after it falls so the page doesn't get bogged down
             setTimeout(() => {
                 column.remove();
             }, duration * 1000);
